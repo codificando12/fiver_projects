@@ -9,7 +9,6 @@ merchants scraped from the site.
 
 From https://gofood.co.id/jakarta/restaurants/near-me?page=1
 
-Need it done within 24 hours with source code
 """
 
 from selenium import webdriver
@@ -33,9 +32,19 @@ def run():
             shop = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
                 (By.XPATH, f'//*[@id="__next"]/div/div[3]/div[1]/div[{restaurant}]/a')))
         shop.click()
-        rest_name = WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, ' //*[@id="__next"]/div/div[2]/div[1]/div[1]/div[1]/div[1]/h1')))
-        print(rest_name.text)
-        time.sleep(3)
+        items = 0
+        while items < 3:
+            rest_name = WebDriverWait(driver,10).until(EC.presence_of_element_located(
+                (By.XPATH, ' //*[@id="__next"]/div/div[2]/div[1]/div[1]/div[1]/div[1]/h1')))
+            loc_distance = WebDriverWait(driver,10).until(EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[2]/div/p')))
+            loc_city =  WebDriverWait(driver,10).until(EC.presence_of_element_located(
+                (By.XPATH, '//*[@id="__next"]/div/div[2]/div[1]/div[2]/div/div[2]/p')))
+            print("restaurant: " + rest_name.text)
+            print(f"location: {loc_city.text} {loc_distance.text}")
+            print(driver.current_url)
+            items += 1
+            time.sleep(3)
         driver.back()
         print(restaurant)
     driver.close()
@@ -43,7 +52,6 @@ if __name__ == "__main__":
     run()
 
 
-#     //*[@id="__next"]/div/div[2]/div[1]/div[1]/div[1]/div[1]/h1
-#    food= //*[@id="section--0"]
-#     //*[@id="section-1dc68fc8-be81-4986-aa15-b8b0497a7db6-2"]/div
-    # //*[@id="section-8fda4412-1d46-4653-bc24-6e7884a23f8c-3"]
+# /html/body/div[2]/div/div[2]/div[3]/div/div[1]/div/div
+# /html/body/div[2]/div/div[2]/div[3]/div/div[2]/div/div[1]
+# /html/body/div[2]/div/div[2]/div[3]/div/div[1]/div/div[1]
