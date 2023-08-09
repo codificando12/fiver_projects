@@ -78,7 +78,7 @@ def run():
                     menu_div += 1
                     food_name = WebDriverWait(driver,10).until(EC.presence_of_element_located(
                         (By.XPATH, f'/html/body/div[2]/div/div[2]/div[3]/div/div[{menu_div}]/div/div[{food_div}]/div/div[1]/div[1]/h3')
-                    ))
+                    ))                
                     food_price = WebDriverWait(driver,10).until(EC.presence_of_element_located(
                         (By.XPATH, f'/html/body/div[2]/div/div[2]/div[3]/div/div[{menu_div}]/div/div[{food_div}]/div/div[1]/div[1]/div/div/span')
                     ))
